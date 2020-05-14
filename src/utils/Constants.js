@@ -1,11 +1,15 @@
 
+import React from 'react';
 import { useState, useEffect } from 'react';
 import gql from "graphql-tag";
 import { useQuery, useMutation, useApolloClient } from "@apollo/react-hooks";
 
 import DefaultClientAPI from '../index';
+import Loading from './component/Loading';
 
 export const configId = "mananml";
+export const defaultImage_system = require("./noImageFound.png");
+
 export const MIDDLETIER_URL = "http://localhost:3000/graphql";
 // export const MIDDLETIER_URL = "http://13.124.162.243/graphql";
 
@@ -24,8 +28,8 @@ const GET_CONFIG_CACHE_QUERY = gql`
     config @client {
       _id
       configId
-      defaultImage
       defaultImage_system
+      defaultImage
       imageSrc
       paymentQRImage
       server
@@ -39,8 +43,8 @@ const SET_CONFIG_CACHE_QUERY = gql`
     config {
       _id
       configId
-      defaultImage
       defaultImage_system
+      defaultImage
       imageSrc
       paymentQRImage
       server
@@ -49,11 +53,24 @@ const SET_CONFIG_CACHE_QUERY = gql`
   }
 `
 
+const handleConfigOuput = (config = null) => {
+  let result = null;
+  if (config) {
+    result = {...config}
+    let newDefaultImage = defaultImage_system;
+    if (result.defaultImage && result.defaultImage != "") {
+      newDefaultImage = result.imageSrc + result.defaultImage;
+    }
+    result['defaultImage'] = newDefaultImage;
+  }
+  return result;
+}
+
 export const setConfigCache = (data) => {
   DefaultClientAPI.client.writeQuery({
     query: SET_CONFIG_CACHE_QUERY,
     data: {
-      config: data
+      config: handleConfigOuput(data)
     }
   });
 }
@@ -85,7 +102,8 @@ export const useConfigQuery = (input) => {
     },
     onCompleted: (result) => {
       if (result && result.userConfig && result.userConfig.success) {
-        setConfigCache(result.userConfig.data)
+        let updateConfig = result.userConfig.data;
+        setConfigCache(updateConfig)
       }
     }
   });
@@ -97,14 +115,16 @@ export const useConfigQuery = (input) => {
     console.log('useConfigQuery',error);
   }
   if (data && data.userConfig) {
-    result = data.userConfig;
+    result = handleConfigOuput(data.userConfig);
   }
   return result;
 }
 
 export const useCustomQuery = (query, options={}) => {
-  const queryResult = useQuery(query,options);
-  return queryResult;
+  const { data, error, loading } = useQuery(query,options);
+  if (loading) return <Loading/>;
+  if (error) return "error"
+  return data;
 }
 
 export const useProductsState = (query, options={}) => {
