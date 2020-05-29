@@ -2,7 +2,7 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import gql from "graphql-tag";
 
-import * as Components from './component/index'; 
+import * as Components from './component/index';
 import { useConfigQuery } from './utils/Constants';
 import Loading from './utils/component/Loading';
 import logo from './logo.svg';
@@ -36,9 +36,10 @@ const App = () => {
       >
         <div className="App">
             <Switch>
+              <Route component={Components['Homepage']} exact={true} path={'/homepage'}/>
               <Route component={Components['Products']} exact={true} path={'/'}/>
               <Route component={Components['Products']} exact={true} path={'/category/:_id'}/>
-              <Route component={Components['Orders']} exact={true} path={'/searchorder'}/> 
+              <Route component={Components['Orders']} exact={true} path={'/searchorder'}/>
               <Route component={NotFound} />
             </Switch>
         </div>

@@ -33,7 +33,7 @@ const Header_01 = (props) => {
       setProductCategories(allCategories);
     }
   },[productsResult]);
-  
+
   const handleNavDrawerOpen = () => {
     setNavDrawerVisible(true);
   }
@@ -48,7 +48,7 @@ const Header_01 = (props) => {
     setCartDrawerVisible(false);
   }
 
-  
+
   const getProductCategoryMenu = () => {
     let result = [];
     productCategories.map((aCategory)=>{
@@ -66,6 +66,10 @@ const Header_01 = (props) => {
 
   const getMenuData = () => {
     let result = [
+      {
+        key: '/homepage',
+        name: '主页'
+      },
       {
         key: '/',
         name: '全部产品'
@@ -90,7 +94,7 @@ const Header_01 = (props) => {
       title = (<><Avatar src={`${configCache.imageSrc+configCache.profile.logo}`}/> {title}</>)
     }
   }
-  
+
   let totalQty = 0;
   if (cartCache) {
     cartCache.items.map((aCartItem)=>{
@@ -98,7 +102,7 @@ const Header_01 = (props) => {
     })
   }
 
-  title = (     
+  title = (
     <>
       <Breadcrumb>
         <Breadcrumb.Item>{title}</Breadcrumb.Item>
@@ -134,7 +138,7 @@ const Header_01 = (props) => {
           </div>
         ]}
       />
-      
+
       <Drawer
         title="目录"
         placement="left"
@@ -161,7 +165,7 @@ const Header_01 = (props) => {
         </Menu>
       </Drawer>
 
-      <CartDrawer 
+      <CartDrawer
         drawerVisible={cartDrawerVisible}
         closeDrawer={handleCartDrawerClose}
       />
