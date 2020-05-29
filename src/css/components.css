@@ -1,0 +1,55 @@
+/* orderInfo */
+.orderInfo-item-summary {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.orderInfo-extra {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.orderInfo-extra > div {
+  flex: 1 1 50%;
+  position: relative;
+  margin-bottom: 10px;
+}
+
+.orderInfo-extra > div > img {
+  width: 100%;
+}
+
+.orderInfo-modalWrapper {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  justify-content: flex-start;
+}
+
+.orderInfo-modalWrapper .ant-modal{
+  width: auto;
+  top: 0;
+  flex: 1;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.orderInfo-modalWrapper .ant-modal-content{
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0;
+  flex: 1;
+}
+
+.orderInfo-modalWrapper .ant-modal-body {
+  flex: 1;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+}

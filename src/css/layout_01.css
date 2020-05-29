@@ -29,3 +29,51 @@
   justify-content: center;
   align-items: center;
 }
+
+#layout_01 .notice {
+  /* position: absolute;
+  left: 0;
+  top: 0;
+  right: 0; */
+  width: 100%;
+  padding: 2px;
+  text-align: center;
+  z-index: 1;
+  /* background-color: rgba(255, 0, 0, 1); */
+  background-color: rgba(0, 0, 0, 0.9);
+  color: white;
+}
+
+
+.slide-in-right {
+  width: 100%;
+  text-align: left;
+  font-weight: bold;
+	-webkit-animation: slide-in-right 20s linear infinite both;
+	        animation: slide-in-right 20s linear infinite both;
+}
+
+@-webkit-keyframes slide-in-right {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-right {
+  0% {
+    -webkit-transform: translateX(100%);
+            transform: translateX(100%);
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: translateX(-100%);
+            transform: translateX(-100%);
+    opacity: 1;
+  }
+}

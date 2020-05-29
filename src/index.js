@@ -1,5 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { 
+  // BrowserRouter as Router,
+  HashRouter as Router,
+} from 'react-router-dom';
 import { ApolloProvider } from '@apollo/react-hooks';
 import './index.css';
 import App from './App';
@@ -9,10 +13,18 @@ import * as serviceWorker from './serviceWorker';
 const theClientAPI = ApolloClientAPI();
 export default theClientAPI;
 const { client, cache, ...restClient } = theClientAPI;
-
+client.writeData({
+  data: {
+    config: null,
+    cart: null,
+    customer: null
+  }
+})
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App/>
+    <Router>
+      <App/>
+    </Router>
   </ApolloProvider>,
   document.getElementById('root')
 );

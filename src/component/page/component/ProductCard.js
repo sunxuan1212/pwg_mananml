@@ -3,7 +3,7 @@ import { Tag, Tooltip } from 'antd';
 import { useConfigCache } from '../../../utils/Constants';
 
 const ProductCard = (props) => {
-  const { product } = props;
+  const { product, onClick } = props;
   const config = useConfigCache();
 
   const getProductImages = () => {
@@ -19,9 +19,13 @@ const ProductCard = (props) => {
     }
   }
 
+  const onCardClicked = () => {
+    onClick()
+  }
+
 
   return (
-    <div className="productCard-container">
+    <div className="productCard-container" onClick={onCardClicked}>
       <div className="productCard-media" style={getProductImages()}></div>
       <div className="productCard-info">
         
@@ -29,9 +33,6 @@ const ProductCard = (props) => {
           <Tooltip title={product.name}>
             <div className="productCard-title">{product.name}</div>
           </Tooltip>
-          {/* {
-            product.published ? <Tag color="green">Active</Tag> : <Tag color="red">Inactive</Tag>
-          } */}
         </div>
       </div>
     </div>
